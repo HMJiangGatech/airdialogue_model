@@ -165,7 +165,7 @@ def secondary_fn_tmp(hparams, identity, model_dir, model, eval_model, eval_sess,
       worker_fn(model, sess, eval_model, eval_sess, latest_ckpt, summary_writer,
                 global_step, hparams)
     if not hparams.eval_forever:
-      break  # if eval_foever is disabled, we only evaluate once
+      break  # if eval_forever is disabled, we only evaluate once
   if summary_writer:
     summary_writer.close()
   sess.close()
