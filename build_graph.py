@@ -243,8 +243,12 @@ def _build_decoder_action(model, dialogue_state, hparams, start_token,
     ## Train or eval
     # situation one, for train, eval, mutable train
     # decoder_emp_inp: [max_time, batch_size, num_units]
+    action = iterator.action
+    # shift action
+    paddings = tf.constant([[0, 0], [1, 0]])
+    action = tf.pad(action, paddings, "CONSTANT", constant_values=0)[:, :-1]
     decoder_emb_inp = tf.nn.embedding_lookup(model.embedding_decoder,
-                                             iterator.action)
+                                             action)
 
     # Helper
     helper_train = seq2seq.TrainingHelper(
